@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 targetPos;
     private Vector3 walkDir;
     private Animator animator;
+    [SerializeField] private LayerMask obsLayer;
 
     private void Start()
     {
@@ -19,7 +20,6 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             targetPos = GetMouseWorldPos(Input.mousePosition);
-
         }
         Move();
     }
@@ -50,11 +50,30 @@ public class PlayerMovement : MonoBehaviour
     {
         Ray screenPointToRay = Camera.main.ScreenPointToRay(mousePos);
         float dist = 0;
+        Vector3 targetPoint = Vector3.zero;
         if (wrldPlane.Raycast(screenPointToRay, out dist))
         {
-            return screenPointToRay.GetPoint(dist);
+            targetPoint = screenPointToRay.GetPoint(dist);
         }
-        return Vector3.zero;
+        RaycastHit hit; // Resultado do Raycast
+        if (Physics.Raycast(screenPointToRay, out hit, Mathf.Infinity, obsLayer))
+        {
+            Debug.Log("Obstáculo Detectado: " + hit.collider.gameObject.name);
+            // Define o ponto de parada próximo ao obstáculo
+            Vector3 directionToObstacle = (transform.position - hit.point).normalized;
+            Debug.DrawRay(hit.point, directionToObstacle * 2f,Color.blue,2f);
+            targetPoint = hit.point + (directionToObstacle * 2f);
+
+        }
+        return targetPoint;
+    }
+
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+
+        Gizmos.DrawSphere(targetPos, 0.5f);
     }
 
 }
