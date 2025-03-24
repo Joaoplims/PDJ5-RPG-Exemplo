@@ -31,8 +31,10 @@ public class PlayerMovement : MonoBehaviour
         {
             float adjustedSpeed = speed / distance;
             transform.position = Vector3.Lerp(transform.position, targetPos, adjustedSpeed * Time.deltaTime);
-            transform.LookAt(targetPos);
             walkDir = targetPos - transform.position;
+            Vector3 lookDir = walkDir.normalized;
+            lookDir.y = 0f;
+            transform.rotation = Quaternion.LookRotation(lookDir);
         }
         else
         {
@@ -61,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log("Obstáculo Detectado: " + hit.collider.gameObject.name);
             // Define o ponto de parada próximo ao obstáculo
             Vector3 directionToObstacle = (transform.position - hit.point).normalized;
-            Debug.DrawRay(hit.point, directionToObstacle * 2f,Color.blue,2f);
+            Debug.DrawRay(hit.point, directionToObstacle * 2f, Color.blue, 2f);
             targetPoint = hit.point + (directionToObstacle * 2f);
 
         }
