@@ -438,6 +438,7 @@ GameObject:
   - component: {fileID: 394601997}
   - component: {fileID: 394602000}
   - component: {fileID: 394601999}
+  - component: {fileID: 394602001}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -527,6 +528,37 @@ CapsuleCollider:
   m_Height: 1.5
   m_Direction: 1
   m_Center: {x: 0, y: 0.72, z: 0}
+--- !u!114 &394602001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394601995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 538e7c022e32ec049a7399d868207d45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  primaryStats:
+    maxHealth: 0
+    maxMana: 0
+    healthRegen: 0
+    manaRegen: 0
+    attackDamage: 0
+    abilityPower: 0
+    attackSpeed: 0
+    magicResist: 0
+    armor: 0
+    critChance: 0
+    moveSpeed: 0
+  secondaryStats:
+    armorPenetration: 0
+    magicPenetration: 0
+    critDamage: 0
+    spellVamp: 0
+    lifeSteal: 0
+    dodgeChance: 0
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
