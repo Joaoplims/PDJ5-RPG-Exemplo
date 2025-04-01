@@ -58,4 +58,15 @@ public class PrimaryStats
 
         return damage * (1 - damageReduction);
     }
+
+    public bool UpdateHealth(float cLife){
+            currentHealth -= cLife;
+            return currentHealth <= 0f;
+
+    }
+
+    public bool UpdateMana(float cMana){
+        currentMana -= cMana;
+        return currentMana <= 0f;
+    }
 }
